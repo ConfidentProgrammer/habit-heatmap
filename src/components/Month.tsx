@@ -12,8 +12,8 @@ function Month({ month }: MonthProps) {
 
   return (
     <div className="flex flex-wrap m-1 w-32">
-      {[...Array(noOfDays)].map((i) => (
-        <Day key={i} />
+      {[...Array(noOfDays)].map((_, i) => (
+        <Day key={i} date={`${i + 1}-${month.name}-${year}`} />
       ))}
     </div>
   );

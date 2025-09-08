@@ -1,5 +1,5 @@
 import { generateDate, isLeapYear, type IMonth } from '../utils/utils';
-import Day from './Day/Day';
+import Day from './Day';
 interface MonthProps {
   month: IMonth;
   toggleDay: (date: Date) => void;

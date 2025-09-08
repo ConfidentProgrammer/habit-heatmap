@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Year from './Year';
 
 interface IHabit {
@@ -14,12 +14,12 @@ const Habit = () => {
     progress: {},
   });
 
-  const toggleDay = (date: Date) => {
+  const toggleDay = useCallback((date: Date) => {
     const dateString = date.toDateString();
-    const currentDate = progress.progress[dateString] ?? false;
-    const newValue = !currentDate;
 
     setProgress((prev) => {
+      const currentDate = prev.progress[dateString] ?? false;
+      const newValue = !currentDate;
       const newProgress = { ...prev.progress };
       newProgress[dateString] = newValue;
       return {
@@ -27,7 +27,7 @@ const Habit = () => {
         progress: newProgress,
       };
     });
-  };
+  }, []);
 
   return (
     <div className="m-6 border-1">

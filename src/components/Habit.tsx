@@ -14,10 +14,25 @@ const Habit = () => {
     progress: {},
   });
 
+  const toggleDay = (date: Date) => {
+    const dateString = date.toDateString();
+    const currentDate = progress.progress[dateString] ?? false;
+    const newValue = !currentDate;
+
+    setProgress((prev) => {
+      const newProgress = { ...prev.progress };
+      newProgress[dateString] = newValue;
+      return {
+        ...prev,
+        progress: newProgress,
+      };
+    });
+  };
+
   return (
-    <div>
-      {' '}
-      <Year />
+    <div className="m-6 border-1">
+      <p className="text-2xl">{progress.name}</p>
+      <Year toggleDay={toggleDay} progress={progress.progress} />
     </div>
   );
 };

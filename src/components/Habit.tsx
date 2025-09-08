@@ -14,6 +14,8 @@ const Habit = () => {
     progress: {},
   });
 
+  const todaysDate = new Date();
+
   const toggleDay = useCallback((date: Date) => {
     const dateString = date.toDateString();
 
@@ -32,7 +34,13 @@ const Habit = () => {
   return (
     <div className="m-6 border-1">
       <p className="text-2xl">{progress.name}</p>
-      <Year toggleDay={toggleDay} progress={progress.progress} />
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+        onClick={() => toggleDay(todaysDate)}
+      >
+        Daily Check-in: {todaysDate.toDateString()}
+      </button>
+      <Year progress={progress.progress} />
     </div>
   );
 };

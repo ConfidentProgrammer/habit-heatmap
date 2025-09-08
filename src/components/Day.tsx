@@ -2,15 +2,13 @@ import React from 'react';
 
 interface IDayProps {
   date: Date;
-  toggleDay: (date: Date) => void;
   isDone: boolean;
 }
-function Day({ date, toggleDay, isDone }: IDayProps) {
+function Day({ date, isDone }: IDayProps) {
   console.log('day rendered');
   return (
     <div
-      className={`border-1 border-solid w-4 h-4 ${isDone ? 'bg-green-600' : ''}`}
-      onClick={() => toggleDay(date)}
+      className={`border-1 border-solid w-4 h-4 ${isDone ? 'bg-green-600' : date < new Date() ? 'bg-gray-400' : ''}`}
     ></div>
   );
 }

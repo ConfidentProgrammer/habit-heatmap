@@ -2,11 +2,10 @@ import { generateDate, isLeapYear, type IMonth } from '../utils/utils';
 import Day from './Day';
 interface MonthProps {
   month: IMonth;
-  toggleDay: (date: Date) => void;
   progress: Record<string, boolean>;
 }
 
-function Month({ month, toggleDay, progress }: MonthProps) {
+function Month({ month, progress }: MonthProps) {
   const year = new Date().getFullYear();
   const isLeap = isLeapYear(year);
 
@@ -19,7 +18,6 @@ function Month({ month, toggleDay, progress }: MonthProps) {
           <Day
             key={generatedDate.getTime()}
             date={generatedDate}
-            toggleDay={toggleDay}
             isDone={progress[generatedDate.toDateString()] ?? false}
           />
         );

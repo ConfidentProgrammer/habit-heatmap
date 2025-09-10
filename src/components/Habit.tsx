@@ -1,5 +1,10 @@
-import { useCallback, useState } from 'react';
 import Year from './Year';
+
+interface IHabitProps {
+  toggleDay: (id: number, date: Date) => void;
+  id: number;
+  habit: IHabit;
+}
 
 interface IHabit {
   id: number;
@@ -7,40 +12,19 @@ interface IHabit {
   progress: Record<string, boolean>;
 }
 
-const Habit = () => {
-  const [progress, setProgress] = useState<IHabit>({
-    id: 1,
-    name: 'Workout',
-    progress: {},
-  });
-
+const Habit = ({ toggleDay, id, habit }: IHabitProps) => {
   const todaysDate = new Date();
-
-  const toggleDay = useCallback((date: Date) => {
-    const dateString = date.toDateString();
-
-    setProgress((prev) => {
-      const currentDate = prev.progress[dateString] ?? false;
-      const newValue = !currentDate;
-      const newProgress = { ...prev.progress };
-      newProgress[dateString] = newValue;
-      return {
-        ...prev,
-        progress: newProgress,
-      };
-    });
-  }, []);
 
   return (
     <div className="m-6 border-1">
-      <p className="text-2xl">{progress.name}</p>
+      <p className="text-2xl">{'Workout Test'}</p>
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
-        onClick={() => toggleDay(todaysDate)}
+        onClick={() => toggleDay(id, todaysDate)}
       >
         Daily Check-in: {todaysDate.toDateString()}
       </button>
-      <Year progress={progress.progress} />
+      <Year progress={habit.progress} />
     </div>
   );
 };

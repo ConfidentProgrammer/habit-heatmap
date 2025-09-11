@@ -1,7 +1,9 @@
 import Habit from './components/Habit';
 
 import './App.css';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import NewHabitForm from './components/NewHabitForm';
+import { loadHabits, saveHabits } from './storage/persistence';
 
 interface IHabit {
   id: number;
@@ -10,21 +12,21 @@ interface IHabit {
 }
 
 function App() {
-  const [habitsProgress, setHabitsProgress] = useState<IHabit[]>([
-    {
-      id: 1,
-      name: 'workout',
-      progress: {},
-    },
-  ]);
+  const [habitsProgress, setHabitsProgress] = useState<IHabit[]>(() => loadHabits());
 
-  const defaultHabit: IHabit = {
-    id: -1,
-    name: 'default Habit',
-    progress: {},
+  useEffect(() => {
+    saveHabits(habitsProgress);
+  }, [habitsProgress]);
+  const handleNameChange = (name: string) => {
+    const newHabit: IHabit = {
+      id: new Date().getTime(),
+      name: name,
+      progress: {},
+    };
+
+    setHabitsProgress((prev) => [...prev, newHabit]);
   };
 
-  console.log(habitsProgress);
   const toggleDay = useCallback((id: number, date: Date) => {
     setHabitsProgress((prev) => {
       const dateString = date.toDateString();
@@ -49,7 +51,10 @@ function App() {
 
   return (
     <>
-      <Habit id={1} toggleDay={toggleDay} habit={habitsProgress.find((h) => h.id === 1) ?? defaultHabit} />
+      <NewHabitForm handleNameChange={handleNameChange} />
+      {habitsProgress.map((habit) => (
+        <Habit key={habit.id} id={habit.id} toggleDay={toggleDay} habit={habit} />
+      ))}
     </>
   );
 }

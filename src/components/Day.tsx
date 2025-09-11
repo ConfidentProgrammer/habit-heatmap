@@ -6,7 +6,6 @@ interface IDayProps {
 }
 function Day({ date, isDone }: IDayProps) {
   const todayDate = new Date();
-
   todayDate.setHours(0, 0, 0, 0);
   return (
     <div

@@ -1,19 +1,26 @@
-import { monthMap } from '../utils/utils';
-
-import Month from './Month';
+import { generateGridForHeatmap } from '../utils/utils';
+import Day from './Day';
 
 interface IYearProps {
   progress: Record<string, boolean>;
 }
 
 function Year({ progress }: IYearProps) {
+  const year = new Date().getFullYear();
+  const dateGrid = generateGridForHeatmap(year);
+  console.log(dateGrid);
   return (
-    <div className="flex flex-wrap">
-      {monthMap.map((month) => {
+    <div className="year-container flex">
+      {dateGrid.map((week) => {
         return (
-          <div className="border-1 border-red-950" key={month.index}>
-            <Month month={month} progress={progress} />
-            {month.name}
+          <div className="week-container" key={week[week.length - 1].getTime()}>
+            {week.map((date, idx) =>
+              date ? (
+                <Day key={date.getTime()} date={date} isDone={progress[date.toDateString()] ?? false} />
+              ) : (
+                <Day key={`filler-${idx}`} date={date} isDone={false} />
+              )
+            )}
           </div>
         );
       })}

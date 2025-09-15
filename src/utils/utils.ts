@@ -77,3 +77,28 @@ export const isLeapYear = (year: number) => {
   }
   return false;
 };
+
+export const generateGridForHeatmap = (year: number) => {
+  const weeks = [];
+  let currentWeek = [];
+  const currentDate = new Date(year, 0, 1);
+
+  while (currentDate.getFullYear() === year) {
+    currentWeek.push(new Date(currentDate));
+    if (currentDate.getDay() === 6) {
+      //if first week does not start from the monday then
+      if (currentWeek.length < 7) {
+        const noOfEmptyFiller = 7 - currentWeek.length;
+        [...Array(noOfEmptyFiller)].forEach(() => currentWeek.unshift(null));
+      }
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  // also need to fill the leftover days
+  if (currentWeek.length > 0) weeks.push(currentWeek);
+
+  return weeks;
+};

@@ -4,12 +4,7 @@ import './App.css';
 import { useCallback, useEffect, useState } from 'react';
 import NewHabitForm from './components/NewHabitForm';
 import { loadHabits, saveHabits } from './storage/persistence';
-
-interface IHabit {
-  id: number;
-  name: string;
-  progress: Record<string, boolean>;
-}
+import type { IHabit } from './types/habitTypes';
 
 function App() {
   const [habitsProgress, setHabitsProgress] = useState<IHabit[]>(() => loadHabits());
@@ -50,12 +45,12 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="border-1">
       <NewHabitForm handleNameChange={handleNameChange} />
       {habitsProgress.map((habit) => (
         <Habit key={habit.id} id={habit.id} toggleDay={toggleDay} habit={habit} />
       ))}
-    </>
+    </div>
   );
 }
 

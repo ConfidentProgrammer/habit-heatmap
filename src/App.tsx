@@ -45,11 +45,12 @@ function App() {
   }, []);
 
   return (
-    <div className="border-1">
-      <NewHabitForm handleNameChange={handleNameChange} />
+    <div className="">
+      <p className="text-2xl font-medium primary-text">Your 2024 Habits</p>
       {habitsProgress.map((habit) => (
         <Habit key={habit.id} id={habit.id} toggleDay={toggleDay} habit={habit} />
       ))}
+      <NewHabitForm handleNameChange={handleNameChange} />
     </div>
   );
 }

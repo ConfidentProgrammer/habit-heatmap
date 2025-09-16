@@ -8,7 +8,6 @@ interface IYearProps {
 function Year({ progress }: IYearProps) {
   const year = new Date().getFullYear();
   const dateGrid = generateGridForHeatmap(year);
-  console.log(dateGrid);
   return (
     <div className="year-container flex">
       {dateGrid.map((week) => {

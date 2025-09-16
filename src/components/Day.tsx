@@ -8,11 +8,13 @@ function Day({ date, isDone }: IDayProps) {
   const todayDate = new Date();
   todayDate.setHours(0, 0, 0, 0);
   if (date === null) {
-    return <div className="w-4 h-4"></div>;
+    return <div className="w-[12px] h-[12px] m-[1px]"></div>;
   }
   return (
     <div
-      className={`border-1 border-solid w-4 h-4 ${isDone ? 'bg-green-600' : date < todayDate ? 'bg-gray-400' : ''}`}
+      className={` w-[12px] h-[12px] m-[1px] ${
+        isDone ? 'bg-green-600' : date < todayDate ? 'bg-gray-400' : 'border-1 border-gray-300 bg-[#F8F8F8]'
+      }`}
     ></div>
   );
 }

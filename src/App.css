@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 #root {
-  max-width: 70%;
+  max-width: 90%;
   margin: 0 auto;
   padding: 2rem;
   /* background-color: #e9eff2; */

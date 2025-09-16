@@ -1,10 +1,13 @@
 import Tag from './Tag';
 import Year from './Year';
 import check from '../assets/check-circle.svg';
+import bin from '../assets/trash-2.svg';
+import Button from './Button';
 interface IHabitProps {
   toggleDay: (id: number, date: Date) => void;
   id: number;
   habit: IHabit;
+  handleDeleteHabit: (id: number) => void;
 }
 
 interface IHabit {
@@ -13,7 +16,7 @@ interface IHabit {
   progress: Record<string, boolean>;
 }
 
-const Habit = ({ toggleDay, id, habit }: IHabitProps) => {
+const Habit = ({ toggleDay, id, habit, handleDeleteHabit }: IHabitProps) => {
   const todaysDate = new Date();
 
   return (
@@ -25,14 +28,16 @@ const Habit = ({ toggleDay, id, habit }: IHabitProps) => {
 
       <div className="year-container flex justify-between">
         <Year progress={habit.progress} />
-        <div className="btn-container flex flex-col justify-end">
-          <button
-            className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-4xl text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 flex"
-            onClick={() => toggleDay(id, todaysDate)}
-          >
-            Mark Done
-            <img className="ml-1" src={check} height={15} width={15} />
-          </button>
+        <div className="btn-container flex flex-col justify-between">
+          <div className="flex justify-end">
+            {' '}
+            <img onClick={() => handleDeleteHabit(id)} className="cursor-pointer" src={bin} height={20} width={20} />
+          </div>
+          <Button
+            text={'Mark Done'}
+            children={<img className="ml-1" src={check} height={15} width={15} />}
+            onClickHandler={() => toggleDay(id, todaysDate)}
+          />
         </div>
       </div>
     </div>

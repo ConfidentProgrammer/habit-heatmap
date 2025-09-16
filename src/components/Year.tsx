@@ -3,6 +3,7 @@ import Day from './Day';
 
 interface IYearProps {
   progress: Record<string, boolean>;
+  theme: string;
 }
 
 function Year({ progress }: IYearProps) {

@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
 body {
-    background-color: #edf4f5;
     font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
+}
+
+html, body, #root { 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+    background: #f8f8f8;
+
+  /* DaisyUI might override bg here, but good to ensure no default white space */
 }

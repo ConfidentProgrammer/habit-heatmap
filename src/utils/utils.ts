@@ -102,3 +102,24 @@ export const generateGridForHeatmap = (year: number) => {
 
   return weeks;
 };
+
+export const getRandomTheme = () => {
+  const themes = [
+    'cupcake',
+    'emerald',
+    'corporate',
+    'garden',
+    'lofi',
+    'pastel',
+    'fantasy',
+    'autumn',
+    'winter',
+    'acid',
+    'nord',
+  ];
+
+  const min = 0;
+  const max = Math.floor(themes.length - 1);
+
+  return themes[Math.floor(Math.random() * (max - min + 1)) + min];
+};

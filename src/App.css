@@ -1,13 +1,8 @@
 @import "tailwindcss";
 
-#root {
-  max-width: 90%;
-  margin: 0 auto;
-  padding: 2rem;
-  /* background-color: #e9eff2; */
-  /* box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) ; */
-  border-radius: 10px;
-}
+@plugin "daisyui" {
+   themes: all;
+ }
 .primary-text {
   color:#2C3E50
 }

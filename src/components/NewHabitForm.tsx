@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import Button from './Button';
 
 interface INewHabitFormProps {
@@ -23,6 +24,7 @@ const NewHabitForm = ({ handleNameChange }: INewHabitFormProps) => {
           handleNameChange(name);
           setName('');
         }}
+        color="success"
       />
     </div>
   );

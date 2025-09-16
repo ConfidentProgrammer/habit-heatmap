@@ -1,8 +1,11 @@
-import Tag from './Tag';
-import Year from './Year';
 import check from '../assets/check-circle.svg';
 import bin from '../assets/trash-2.svg';
+
+import type { IHabit } from '../types/habitTypes';
 import Button from './Button';
+import Tag from './Tag';
+import Year from './Year';
+
 interface IHabitProps {
   toggleDay: (id: number, date: Date) => void;
   id: number;
@@ -10,37 +13,27 @@ interface IHabitProps {
   handleDeleteHabit: (id: number) => void;
 }
 
-interface IHabit {
-  id: number;
-  name: string;
-  progress: Record<string, boolean>;
-}
-
 const Habit = ({ toggleDay, id, habit, handleDeleteHabit }: IHabitProps) => {
   const todaysDate = new Date();
 
   return (
-    <div className="m-6 bg-[#f6f6f7] p-6 shadow-lg rounded-lg">
-      <div className="heading flex m-2">
-        <p className="text-2xl font-medium mr-2 primary-text">{habit.name}</p>
-        <Tag text="28 Day streak" />
-      </div>
-
-      <div className="year-container flex justify-between">
-        <Year progress={habit.progress} />
-        <div className="btn-container flex flex-col justify-between">
-          <div className="flex justify-end">
+    <>
+      <div className="card bg-base-100 shadow-sm mt-10 mx-5">
+        <div className="card-body">
+          <h2 className="card-title text-xl">
             {' '}
+            {habit.name} <Tag text="28 Day streak" />
             <img onClick={() => handleDeleteHabit(id)} className="cursor-pointer" src={bin} height={20} width={20} />
+          </h2>
+          <div className="year-container flex justify-between">
+            <Year progress={habit.progress} theme={habit.dataTheme} />
+          </div>{' '}
+          <div className="flex justify-end">
+            <Button text="Mark Done" onClickHandler={() => toggleDay(id, todaysDate)} />
           </div>
-          <Button
-            text={'Mark Done'}
-            children={<img className="ml-1" src={check} height={15} width={15} />}
-            onClickHandler={() => toggleDay(id, todaysDate)}
-          />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

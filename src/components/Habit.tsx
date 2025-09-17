@@ -1,4 +1,3 @@
-import check from '../assets/check-circle.svg';
 import bin from '../assets/trash-2.svg';
 
 import type { IHabit } from '../types/habitTypes';
@@ -26,7 +25,7 @@ const Habit = ({ toggleDay, id, habit, handleDeleteHabit }: IHabitProps) => {
             <img onClick={() => handleDeleteHabit(id)} className="cursor-pointer" src={bin} height={20} width={20} />
           </h2>
           <div className="year-container flex justify-between">
-            <Year progress={habit.progress} theme={habit.dataTheme} />
+            <Year progress={habit.progress} theme={habit.dataTheme} habit={habit} toggleDay={toggleDay} />
           </div>{' '}
           <div className="flex justify-end">
             <Button text="Mark Done" onClickHandler={() => toggleDay(id, todaysDate)} />

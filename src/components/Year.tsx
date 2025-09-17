@@ -1,12 +1,15 @@
+import type { IHabit } from '../types/habitTypes';
 import { generateGridForHeatmap } from '../utils/utils';
 import Day from './Day';
 
 interface IYearProps {
   progress: Record<string, boolean>;
   theme: string;
+  habit: IHabit;
+  toggleDay: (id: number, todayDate: Date) => void;
 }
 
-function Year({ progress }: IYearProps) {
+function Year({ progress, habit, toggleDay }: IYearProps) {
   const year = new Date().getFullYear();
   const dateGrid = generateGridForHeatmap(year);
   return (
@@ -16,9 +19,15 @@ function Year({ progress }: IYearProps) {
           <div className="week-container" key={week[week.length - 1].getTime()}>
             {week.map((date, idx) =>
               date ? (
-                <Day key={date.getTime()} date={date} isDone={progress[date.toDateString()] ?? false} />
+                <Day
+                  toggleDay={toggleDay}
+                  habit={habit}
+                  key={date.getTime()}
+                  date={date}
+                  isDone={progress[date.toDateString()] ?? false}
+                />
               ) : (
-                <Day key={`filler-${idx}`} date={date} isDone={false} />
+                <Day toggleDay={toggleDay} habit={habit} key={`filler-${idx}`} date={date} isDone={false} />
               )
             )}
           </div>

@@ -1,5 +1,4 @@
 import type { IHabit } from '../types/habitTypes';
-import { generateGridForHeatmap } from '../utils/utils';
 import Day from './Day';
 
 interface IYearProps {
@@ -7,11 +6,10 @@ interface IYearProps {
   theme: string;
   habit: IHabit;
   toggleDay: (id: number, todayDate: Date) => void;
+  dateGrid: Date[][];
 }
 
-function Year({ progress, habit, toggleDay }: IYearProps) {
-  const year = new Date().getFullYear();
-  const dateGrid = generateGridForHeatmap(year);
+function Year({ progress, habit, toggleDay, dateGrid }: IYearProps) {
   return (
     <div className="year-container flex">
       {dateGrid.map((week) => {

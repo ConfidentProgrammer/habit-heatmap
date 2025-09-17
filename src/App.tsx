@@ -7,10 +7,12 @@ import { loadHabits, saveHabits } from './storage/persistence';
 import './App.css';
 
 import type { IHabit } from './types/habitTypes';
-import { getRandomTheme } from './utils/utils';
+import { generateGridForHeatmap, getRandomTheme, initializeProgress } from './utils/utils';
 
 function App() {
   const [habitsProgress, setHabitsProgress] = useState<IHabit[]>(() => loadHabits());
+  const year = new Date().getFullYear();
+  const dateGrid = generateGridForHeatmap(year);
 
   useEffect(() => {
     saveHabits(habitsProgress);
@@ -23,7 +25,7 @@ function App() {
     const newHabit: IHabit = {
       id: new Date().getTime(),
       name: name,
-      progress: {},
+      progress: initializeProgress(dateGrid),
       dataTheme: getRandomTheme(),
     };
 
@@ -63,6 +65,7 @@ function App() {
       <div className="habits-container flex flex-wrap justify-center">
         {habitsProgress.map((habit) => (
           <Habit
+            dateGrid={dateGrid}
             key={habit.id}
             id={habit.id}
             toggleDay={toggleDay}

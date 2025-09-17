@@ -1,6 +1,8 @@
+import { useMemo } from 'react';
 import bin from '../assets/trash-2.svg';
 
 import type { IHabit } from '../types/habitTypes';
+import { getLongestStreak } from '../utils/utils';
 import Button from './Button';
 import Tag from './Tag';
 import Year from './Year';
@@ -10,22 +12,30 @@ interface IHabitProps {
   id: number;
   habit: IHabit;
   handleDeleteHabit: (id: number) => void;
+  dateGrid: Date[][];
 }
 
-const Habit = ({ toggleDay, id, habit, handleDeleteHabit }: IHabitProps) => {
+const Habit = ({ toggleDay, id, habit, handleDeleteHabit, dateGrid }: IHabitProps) => {
   const todaysDate = new Date();
-
+  const longestStreak = useMemo(() => getLongestStreak(habit.progress), [habit.progress]);
+  console.log(longestStreak);
   return (
     <>
       <div className="card bg-base-100 shadow-sm mt-5 mx-5">
         <div className="card-body">
           <h2 className="card-title text-xl">
             {' '}
-            {habit.name} <Tag text="28 Day streak" />
+            {habit.name} <Tag text={`${longestStreak} day(s) streak`} />
             <img onClick={() => handleDeleteHabit(id)} className="cursor-pointer" src={bin} height={20} width={20} />
           </h2>
           <div className="year-container flex justify-between">
-            <Year progress={habit.progress} theme={habit.dataTheme} habit={habit} toggleDay={toggleDay} />
+            <Year
+              dateGrid={dateGrid}
+              progress={habit.progress}
+              theme={habit.dataTheme}
+              habit={habit}
+              toggleDay={toggleDay}
+            />
           </div>{' '}
           <div className="flex justify-end">
             <Button text="Mark Done" onClickHandler={() => toggleDay(id, todaysDate)} />

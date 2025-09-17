@@ -5,7 +5,7 @@ interface Itag {
 const Tag = ({ text }: Itag) => {
   return (
     <div>
-      <span className="badge badge-soft badge-primary text-xs">{text}</span>
+      <span className="badge badge-soft bg-green-200 text-xs">{text}</span>
     </div>
   );
 };

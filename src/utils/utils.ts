@@ -78,7 +78,7 @@ export const isLeapYear = (year: number) => {
   return false;
 };
 
-export const generateGridForHeatmap = (year: number) => {
+export const generateGridForHeatmap = (year: number): Date[][] => {
   const weeks = [];
   let currentWeek = [];
   const currentDate = new Date(year, 0, 1);
@@ -122,4 +122,36 @@ export const getRandomTheme = () => {
   const max = Math.floor(themes.length - 1);
 
   return themes[Math.floor(Math.random() * (max - min + 1)) + min];
+};
+
+export const getLongestStreak = (progress: Record<string, boolean>): number => {
+  const sortedValues = Object.keys(progress)
+    .sort((a, b) => {
+      return Date.parse(a) - Date.parse(b);
+    })
+    .map((key) => progress[key]);
+
+  let currentStreak = 0;
+  let longestStreak = 0;
+  let i = 0;
+  while (i < sortedValues.length) {
+    if (sortedValues[i] === true) {
+      currentStreak = currentStreak + 1;
+    } else {
+      currentStreak = 0;
+    }
+    longestStreak = Math.max(longestStreak, currentStreak);
+    i++;
+  }
+  return longestStreak;
+};
+
+export const initializeProgress = (dateGrid: Date[][]): Record<string, boolean> => {
+  const progress: Record<string, boolean> = {};
+  dateGrid.forEach((week) => {
+    week.forEach((date) => {
+      if (date) progress[date.toDateString()] = false;
+    });
+  });
+  return progress;
 };

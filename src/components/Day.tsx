@@ -6,21 +6,25 @@ interface IDayProps {
 }
 function Day({ date, isDone }: IDayProps) {
   const todayDate = new Date();
+  const dimensions = '12px';
   todayDate.setHours(0, 0, 0, 0);
   if (date === null) {
-    return <div className="w-[10px] h-[10px] m-[1px]"></div>;
+    return <div className={`w-[${dimensions}] h-[${dimensions}] m-[1px]`}></div>;
   }
+
   const getBackgroundColor = () => {
     if (isDone) {
-      return 'bg-primary';
+      return 'bg-success';
+    } else if (date < todayDate) {
+      return 'bg-gray-400';
     }
-    return 'bg-base-300';
+    return 'bg-gray-200';
   };
 
   return (
     <>
       <div className="tooltip block" data-tip={date.toDateString()}>
-        <div className={`w-[10px] h-[10px] m-[1px] rounded-xs ${getBackgroundColor()}`}></div>
+        <div className={`w-[${dimensions}] h-[${dimensions}] m-[1px] rounded-xs ${getBackgroundColor()}`}></div>
       </div>
     </>
   );

@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div className="bg-base-200 p-10" data-theme="light">
-      <p className="text-3xl font-semibold text-shadow-neutral-content text-center my-4">Your 2024 Habits</p>
+      <p className="text-3xl font-semibold text-shadow-neutral-content text-center my-3">Your 2024 Habits</p>
       <NewHabitForm handleNameChange={handleNameChange} />
       <div className="habits-container flex flex-wrap justify-center">
         {habitsProgress.map((habit) => (

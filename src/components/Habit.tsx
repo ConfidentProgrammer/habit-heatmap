@@ -18,7 +18,7 @@ const Habit = ({ toggleDay, id, habit, handleDeleteHabit }: IHabitProps) => {
 
   return (
     <>
-      <div className="card bg-base-100 shadow-sm mt-10 mx-5">
+      <div className="card bg-base-100 shadow-sm mt-5 mx-5">
         <div className="card-body">
           <h2 className="card-title text-xl">
             {' '}

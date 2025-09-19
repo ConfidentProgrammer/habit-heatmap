@@ -1,28 +1,17 @@
 import React from 'react';
 
 interface IButtonProps {
-  text?: string;
-  children?: React.ReactNode;
+  text: string;
+  btnChildren?: React.ReactNode;
   onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
-  color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error';
-  outline?: boolean;
+  buttonClasses: string;
 }
 
-const Button = ({ text, children, onClickHandler, color, outline }: IButtonProps) => {
-  const buttonClasses = ['btn'];
-
-  if (color) {
-    buttonClasses.push(`btn-${color}`);
-  }
-
-  if (outline) {
-    buttonClasses.push('btn-outline');
-  }
-
+const Button = ({ text, btnChildren, onClickHandler, buttonClasses }: IButtonProps) => {
   return (
-    <button className={buttonClasses.join(' ')} onClick={onClickHandler}>
+    <button className={buttonClasses} onClick={onClickHandler}>
       {text}
-      {children}{' '}
+      {btnChildren}{' '}
     </button>
   );
 };

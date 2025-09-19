@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import bin from '../assets/trash-2.svg';
 
 import type { IHabit } from '../types/habitTypes';
@@ -38,7 +39,7 @@ const Habit = ({ toggleDay, id, habit, handleDeleteHabit, dateGrid }: IHabitProp
             />
           </div>{' '}
           <div className="flex justify-end">
-            <Button text="Mark Done" onClickHandler={() => toggleDay(id, todaysDate)} />
+            <Button buttonClasses="btn" text="Mark Today Done" onClickHandler={() => toggleDay(id, todaysDate)} />
           </div>
         </div>
       </div>

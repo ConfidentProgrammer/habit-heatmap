@@ -8,6 +8,8 @@ import './App.css';
 
 import type { IHabit } from './types/habitTypes';
 import { generateGridForHeatmap, getRandomTheme, initializeProgress } from './utils/utils';
+import Dialog from './components/Dialog';
+import { IoAddCircleOutline } from 'react-icons/io5';
 
 function App() {
   const [habitsProgress, setHabitsProgress] = useState<IHabit[]>(() => loadHabits());
@@ -61,7 +63,7 @@ function App() {
   return (
     <div className="bg-base-200 p-10" data-theme="light">
       <p className="text-3xl font-semibold text-shadow-neutral-content text-center my-3">Your 2024 Habits</p>
-      <NewHabitForm handleNameChange={handleNameChange} />
+
       <div className="habits-container flex flex-wrap justify-center">
         {habitsProgress.map((habit) => (
           <Habit
@@ -73,6 +75,14 @@ function App() {
             habit={habit}
           />
         ))}
+      </div>
+      <div className="dialog-container flex not-first:justify-center mt-7 ">
+        <Dialog
+          btnText={'Add a Habit'}
+          btnClasses={'btn p-5'}
+          dialogChildren={<NewHabitForm handleNameChange={handleNameChange} />}
+          btnChildren={<IoAddCircleOutline size={18} />}
+        />
       </div>
     </div>
   );

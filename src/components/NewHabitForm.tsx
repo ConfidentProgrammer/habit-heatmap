@@ -8,23 +8,29 @@ interface INewHabitFormProps {
 
 const NewHabitForm = ({ handleNameChange }: INewHabitFormProps) => {
   const [name, setName] = useState<string>('');
-
   return (
-    <div className="flex items-center justify-center">
-      <input
-        type="text"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2"
-        placeholder="Habit Name"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-      />
+    <div className="flex flex-col gap-6">
+      <div className="title-desc flex flex-col">
+        <h3 className="font-bold text-xl">Add a New Habit</h3>
+        <p className="text-sm">What's one thing you want to do more consistently?</p>
+      </div>
+      <div className="form-field">
+        <input
+          type="text"
+          className="bg-gray-50 border w-full border-green-500  text-sm rounded-md p-3 dark:placeholder-gray-400     focus:outline-none focus:border-green-500 focus:border-2 focus:shadow-lg transition duration-200 ease-in-out"
+          placeholder="e.g, Medidate, Read, Workout"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+      </div>
+
       <Button
+        buttonClasses="btn p-3 rounded-md"
         text="Add New Habit"
         onClickHandler={() => {
           handleNameChange(name);
           setName('');
         }}
-        color="success"
       />
     </div>
   );
